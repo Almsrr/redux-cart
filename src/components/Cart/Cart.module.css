@@ -1,0 +1,23 @@
+.cart {
+  width: 30rem;
+  background-color: #313131;
+  color: white;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.cart h2 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.amount {
+  color: red;
+  font-size: 1.5rem;
+}
