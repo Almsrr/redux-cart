@@ -1,5 +1,3 @@
-import React from "react";
-
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Modal from "../UI/Modal/Modal";
@@ -7,6 +5,7 @@ import { useSelector } from "react-redux";
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
+
   return (
     <Modal>
       <div className={classes.cart}>
