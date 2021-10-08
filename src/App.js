@@ -4,7 +4,7 @@ import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { uiActions } from "./store/ui-slice";
+import { sendCartData } from "./store/cart-slice";
 import Notification from "./components/UI/Notification/Notification";
 
 let firstTime = true;
@@ -16,42 +16,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const sendCartItem = async () => {
-      dispatch(
-        uiActions.showNotification({
-          status: "sending",
-          title: "Sending...",
-          message: "Sending cart item... ",
-        })
-      );
-      await fetch(
-        "https://react-http-18ddb-default-rtdb.firebaseio.com/cart.json",
-        {
-          method: "PUT",
-          body: JSON.stringify(cart),
-        }
-      );
-      dispatch(
-        uiActions.showNotification({
-          status: "success",
-          title: "Cart item sent",
-          message: "Cart item sent successfully",
-        })
-      );
-    };
     if (firstTime) {
       firstTime = false;
       return;
     }
-    sendCartItem().catch((error) => {
-      dispatch(
-        uiActions.showNotification({
-          status: "error",
-          title: "Error",
-          message: error.message,
-        })
-      );
-    });
+    dispatch(sendCartData(cart));
   }, [cart, dispatch]);
   return (
     <Fragment>
