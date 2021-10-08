@@ -4,8 +4,9 @@ import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { sendCartData } from "./store/cart-slice";
+import { sendCartData } from "./store/cart-actions";
 import Notification from "./components/UI/Notification/Notification";
+import { fetchCartData } from "./store/cart-actions";
 
 let firstTime = true;
 
@@ -16,11 +17,15 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (firstTime) {
       firstTime = false;
       return;
     }
-    dispatch(sendCartData(cart));
+    if (cart.updated) dispatch(sendCartData(cart));
   }, [cart, dispatch]);
   return (
     <Fragment>
